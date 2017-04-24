@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.liujp.dao.mybatis.UserMapper" >
+  <resultMap id="BaseResultMap" type="com.liujp.model.User" >
+    <id column="userid" property="userid" jdbcType="INTEGER" />
+    <result column="username" property="username" jdbcType="VARCHAR" />
+    <result column="password" property="password" jdbcType="VARCHAR" />
+    <result column="first_name" property="firstName" jdbcType="VARCHAR" />
+    <result column="last_name" property="lastName" jdbcType="VARCHAR" />
+    <result column="birthday" property="birthday" jdbcType="DATE" />
+    <result column="age" property="age" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    userid, username, password, first_name, last_name, birthday, age
+  </sql>
+  <select id="selectById" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from tuser
+    where userid = #{userid}
+  </select>
+  <insert id="insert" parameterType="com.liujp.model.User" >
+    insert into tuser (userid, username, password, 
+      first_name, last_name, birthday, 
+      age)
+    values (#{userid}, #{username}, #{password}, 
+      #{firstName}, #{lastName}, #{birthday}, 
+      #{age})
+  </insert>
+</mapper>
